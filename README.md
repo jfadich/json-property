@@ -14,8 +14,10 @@ Use composer to install the package
 2. Set the `jsonField` property. This is the name of the method that will be called to access the JsonField object
 ```
     namespace App;
+    
     use Jfadich\JsonField\JsonFieldTrait;
-
+    use Jfadich\JsonField\JsonFieldInterface;
+    
     class SampleModel implements JsonFieldInterface
     {
         use JsonFieldTrait;
