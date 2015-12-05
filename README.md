@@ -1,5 +1,5 @@
 # JsonField
-Enhances a plain text SQL field converting it to JSON and exposing helpful methods.
+The JsonField class provides a helpful interface for working with arrays of data intended to be stored as a JSON string.
 
 ## Installation
 Use composer to install the package
