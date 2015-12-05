@@ -1,5 +1,5 @@
 {
-  "name": "jfadich/JsonField",
+  "name": "jfadich/json-field",
   "description": "Makes interacting with a JSON string stored in a database easier",
   "license": "MIT",
   "keywords": ["json", "laravel"],
