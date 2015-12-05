@@ -1,14 +1,16 @@
 {
-  "name": "jfadich/JsonSettings",
+  "name": "jfadich/JsonField",
   "description": "Makes interacting with a JSON string stored in a database easier",
   "license": "MIT",
-  "keywords": ["json"],
+  "keywords": ["json", "laravel"],
   "authors": [
     {
       "name": "John Fadich"
     }
   ],
-  "require": {},
+  "require": {
+    "php": ">=5.5.9"
+  },
   "require-dev": {
     "phpunit/phpunit": "4.0.*"
   },
