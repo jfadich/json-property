@@ -63,4 +63,4 @@ Remove element from array. This will automatically be persisted
 
 `all()`
 
-Get all the element from the array
+Get all the elements from the array
