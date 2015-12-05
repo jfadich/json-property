@@ -53,6 +53,10 @@ Get a value, or default if it is not present in the array. You can use the dot n
 
 Set/Update the given key/value pair. This will automatically persist to the database.
 
+`merge( array $values )`
+
+Merge the given array into the save one. *Note: This will only merge values for keys that already exist in the array. To add new keys you must use set().*
+
 `forget($key)`
 
 Remove element from array. This will automatically be persisted
