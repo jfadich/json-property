@@ -1,0 +1,20 @@
+{
+  "name": "jfadich/JsonSettings",
+  "description": "Makes interacting with a JSON string stored in a database easier",
+  "license": "MIT",
+  "keywords": ["json"],
+  "authors": [
+    {
+      "name": "John Fadich"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "4.0.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "JFadich\\JsonField\\": "src"
+    }
+  }
+}
