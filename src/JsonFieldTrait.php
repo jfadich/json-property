@@ -1,6 +1,6 @@
 <?php
 
-namespace Jfadich;
+namespace Jfadich\JsonField;
 
 trait JsonFieldTrait
 {
