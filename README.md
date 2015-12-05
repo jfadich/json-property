@@ -28,12 +28,13 @@ The default implementation of `JsonFieldInterface` looks for a property on the m
 If your set up differs you simply need to override the `getJsonString()` and/or `saveJsonString($jsonString)` methods.
 
 ## Usage
-To get the JsonField instance call `$model->{$jsonField}()`. From there you have access to all the methods below.
+To get the JsonField instance call `$model->getJson()`. From there you have access to all the methods below.
 
     $model = new SampleModel();
 
     // These are both equivalent
-    $value = $model->meta()->get('getName');
+    $value = $model->getJson()->get('keyName'); 
+    $value = $model->meta()->get('keyName');
     $value = $model->meta('keyName');
 
 
