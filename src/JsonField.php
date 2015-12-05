@@ -34,10 +34,6 @@ class JsonField
      */
     public function __construct( &$model, $field )
     {
-        if ( !property_exists( $model, $field ) ) {
-            throw new Exception( 'json_field is not set.' );
-        }
-
         $this->field    = $field;
         $this->settings = $model->{$field} ?: [];
         $this->model    = $model;
