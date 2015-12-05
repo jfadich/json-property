@@ -11,21 +11,21 @@ Use composer to install the package
 
 ### Configuration
 1. Add the `JsonFieldTrait` trait to the model
-2. Set the `jsonField` property. This is the name of the method that will be called to access the JsonField object.
-
-
+2. Set the `jsonField` property. This is the name of the method that will be called to access the JsonField object
+```
     namespace App;
     use Jfadich\JsonField\JsonFieldTrait;
+
     class SampleModel implements JsonFieldInterface
     {
         use JsonFieldTrait;
         protected $jsonField = 'meta';
-    }
-
+    }`
+```
 ### Customization
 The default implementation of `JsonFieldInterface` looks for a property on the model based on the value of `jsonField` to access the raw JSON string. It also assumes there is a `$model->save()` method available to persist the changes. 
 
-If your set up differs you simply need to override the `getJsonString()` and `saveJsonString($jsonString)` methods.
+If your set up differs you simply need to override the `getJsonString()` and/or `saveJsonString($jsonString)` methods.
 
 ## Usage
 To get the JsonField instance call `$model->jsonField()`. From there you have access to all the methods below.
