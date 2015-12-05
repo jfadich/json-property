@@ -58,7 +58,7 @@ Set/Update the given key/value pair. This will automatically persist to the data
 
 `merge( array $values )`
 
-Merge the given array into the save one. *Note: This will only merge values for keys that already exist in the array. To add new keys you must use set().*
+Merge the given array into the saved one. *Note: This will only merge values for keys that already exist in the array. To add new keys you must use set().*
 
 `forget($key)`
 
