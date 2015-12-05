@@ -21,11 +21,11 @@ class JsonField
     protected $data = [ ];
 
     /**
-     * @param JsonFieldInterface|Model $model
+     * @param JsonFieldInterface $model
      */
     public function __construct( JsonFieldInterface &$model )
     {
-        $data           = json_decode( $model->getJsonString() );
+        $data           = json_decode( $model->getJsonString(), true );
         $this->data     = is_array($data) ? $data : [];
         $this->model    = $model;
     }
