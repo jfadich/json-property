@@ -1,10 +1,10 @@
 # JsonField
 Enable saving/reading valid JSON to an Eloquent package
 
-## IOnstallation
+## Installation
 Use composer to install the package
 
-`composer require Jfadich/JsonField`
+`composer require composer require jfadich/json-field`
 
 ## Usage
 ### Set Up
