@@ -2,21 +2,21 @@
 
 namespace Jfadich\JsonField;
 
+use Exception;
+
 trait JsonFieldTrait
 {
     /**
-     * Instance of the Json Field object
-     * @var null
+     * Instance of the JsonField object
+     * @var JsonField
      */
     private $jsonInstance = null;
 
     /**
-     * Get Json Object. If key is given return associated value
-     *
-     * @param null $key
-     * @param null $default
-     * @return mixed|null|Settings
-     * @throws Exception
+     * Get Json Object. If a key is given return associated value
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
      */
     public function getJson( $key = null, $default = null )
     {
@@ -29,25 +29,60 @@ trait JsonFieldTrait
         return $instance;
     }
 
-    protected function getJsonInstance()
+    /**
+     * Retrieve the raw JSON string from the model
+     * @return null|string
+     * @throws Exception
+     */
+    public function getJsonString()
     {
-        if ( $this->json_field === null ) {
-            throw new Exception( 'json_field is not set on model.' );
+        if ( $this->jsonField === null ) {
+            throw new Exception( 'jsonField is not set on model.' );
+        }
+        return $this->{$this->jsonField};
+    }
+
+    /**
+     * Set the raw json string on the model and persist it
+     * @param $jsonString
+     * @throws Exception
+     */
+    public function saveJsonString($jsonString)
+    {
+        if ( $this->jsonField === null ) {
+            throw new Exception( 'jsonField is not set on model '. get_class($this) );
         }
 
+        $this->{$this->jsonField} = $jsonString;
+
+        $this->save();
+    }
+
+    /**
+     * Instantiate the JsonField object, or return the existing instance
+     * @return JsonField
+     */
+    private function getJsonInstance()
+    {
         if ( !$this->jsonInstance instanceof JsonField ) {
-            $this->jsonInstance = new JsonField( $this, $this->json_field );
+            $this->jsonInstance = new JsonField( $this );
         }
 
         return $this->jsonInstance;
     }
 
+    /**
+     * Magic method used to enable using the field name to access this object
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     */
     public function __call($method, $arguments)
     {
-        // Defer to parent if the field is not set or is not being requested
-        if($this->json_field === null || $method != $this->json_field)
-            return parent::__call($method, $arguments);
+        if($method === $this->jsonField) {
+            return call_user_func_array([$this, 'getJson'], $arguments);
+        }
 
-        return call_user_func_array([$this, 'getJson'], $arguments);
+        return parent::__call($method, $arguments);
     }
 }

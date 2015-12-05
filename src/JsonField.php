@@ -9,46 +9,37 @@ class JsonField
     /**
      * Model to present from
      *
-     * @var Model
+     * @var JsonFieldInterface
      */
     protected $model;
-
-    /**
-     * Field on the model to save data to
-     *
-     * @var string
-     */
-    private $field;
 
     /**
      * Array of current values
      *
      * @var array
      */
-    protected $settings = [ ];
+    protected $data = [ ];
 
     /**
-     * @param Model $model
-     * @param string $field
-     * @throws Exception
+     * @param JsonFieldInterface|Model $model
      */
-    public function __construct( &$model, $field )
+    public function __construct( JsonFieldInterface &$model )
     {
-        $this->field    = $field;
-        $this->settings = $model->{$field} ?: [];
+        $data           = json_decode( $model->getJsonString() );
+        $this->data     = is_array($data) ? $data : [];
         $this->model    = $model;
     }
 
     /**
      * Merge the given array into existing values. Do not allow adding fields here
      *
-     * @param array $attributes
+     * @param array $values
      */
-    public function merge( array $attributes )
+    public function merge( array $values )
     {
-        $this->settings = array_merge(
-            $this->settings,
-            array_only( $attributes, array_keys( $this->settings ) )
+        $this->data = array_merge(
+            $this->data,
+            array_only( $values, array_keys( $this->data ) )
         );
 
         $this->persist();
@@ -61,7 +52,7 @@ class JsonField
      */
     public function get( $key, $default = null )
     {
-        return array_get( $this->settings, $key, $default );
+        return array_get( $this->data, $key, $default );
     }
 
     /**
@@ -70,7 +61,7 @@ class JsonField
      */
     public function set( $key, $value )
     {
-        $this->settings[ $key ] = $value;
+        $this->data[ $key ] = $value;
         $this->persist();
     }
 
@@ -82,7 +73,7 @@ class JsonField
     public function forget($key)
     {
         if($this->has($key)) {
-            unset($this->settings[$key]);
+            unset($this->data[$key]);
         }
 
         $this->persist();
@@ -94,7 +85,7 @@ class JsonField
      */
     public function has( $key )
     {
-        return array_key_exists( $key, $this->settings );
+        return array_key_exists( $key, $this->data );
     }
 
     /**
@@ -102,17 +93,15 @@ class JsonField
      */
     public function all()
     {
-        return $this->settings;
+        return $this->data;
     }
 
     /**
      * Save the model
      */
-    protected function persist()
+    private function persist()
     {
-        $this->model->{$this->field} = $this->settings;
-
-        $this->model->save();
+        $this->model->saveJsonString(json_encode($this->data));
     }
 
     /**
