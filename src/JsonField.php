@@ -34,6 +34,7 @@ class JsonField
      * Merge the given array into existing values. Do not allow adding fields here
      *
      * @param array $values
+     * @return array
      */
     public function merge( array $values )
     {
@@ -43,6 +44,8 @@ class JsonField
         );
 
         $this->persist();
+
+        return $this->all();
     }
 
     /**
@@ -61,8 +64,10 @@ class JsonField
      */
     public function set( $key, $value )
     {
-        $this->data[ $key ] = $value;
+        array_set($key, $value);
         $this->persist();
+
+        return $value;
     }
 
     /**
@@ -73,7 +78,7 @@ class JsonField
     public function forget($key)
     {
         if($this->has($key)) {
-            unset($this->data[$key]);
+            array_forget($this->data, $key);
         }
 
         $this->persist();
@@ -85,7 +90,7 @@ class JsonField
      */
     public function has( $key )
     {
-        return array_key_exists( $key, $this->data );
+        return array_has( $this->data, $key );
     }
 
     /**
