@@ -25,7 +25,7 @@ Use composer to install the package
     }`
 ```
 ### Customization
-The default implementation of `JsonFieldInterface` looks for a property on the model based on the value of `jsonField` to access the raw JSON string. It also assumes there is a `$model->save()` method available to persist the changes. 
+The default implementation of `JsonFieldInterface` looks for a property on the model based on the value of `jsonField` to access the raw JSON string.
 
 If your set up differs you simply need to override the `getJsonString()` and/or `saveJsonString($jsonString)` methods.
 
