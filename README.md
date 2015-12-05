@@ -1,5 +1,5 @@
 # JsonField
-Enable saving/reading valid JSON to an Eloquent model
+Enhances a plain text SQL field converting it to JSON and exposing helpful methods.
 
 ## Installation
 Use composer to install the package
@@ -37,3 +37,26 @@ To get the JsonField instance call the method matching the json field name. From
 
 ### Available Methods
 
+`has($key)`
+
+Checks if there is a value for the given key
+
+    if($model->meta()->has('keyName')) {
+        // Do something
+    }
+
+`get( $key, $default = null )`
+
+Get a value, or default if it is not present in the array. You can use the dot notation to access nested arrays.
+
+`set($key, $value)`
+
+Set/Update the given key/value pair. This will automatically persist to the database.
+
+`forget($key)`
+
+Remove element from array. This will automatically be persisted
+
+`all()`
+
+Get all the element from the array
