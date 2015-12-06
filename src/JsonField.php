@@ -45,7 +45,20 @@ class JsonField
 
         $this->persist();
 
-        return $this->all();
+        return $this;
+    }
+
+    public function sort($sortColumn)
+    {
+        if($this->has($sortColumn)) {
+            $this->data = array_sort($this->get($sortColumn, []), function($value, $key) {
+                return $key;
+            });
+
+            $this->persist();
+        }
+
+        return $this;
     }
 
     /**
@@ -64,7 +77,7 @@ class JsonField
      */
     public function set( $key, $value )
     {
-        array_set($key, $value);
+        array_set($this->data, $key, $value);
         $this->persist();
 
         return $value;

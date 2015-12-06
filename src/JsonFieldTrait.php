@@ -54,8 +54,6 @@ trait JsonFieldTrait
         }
 
         $this->{$this->jsonField} = $jsonString;
-
-        $this->save();
     }
 
     /**
