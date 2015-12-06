@@ -81,3 +81,11 @@ The property on the object will always be an up to date JSON string so you can u
     
     // $model->meta
     // { "book":{"title": "Cracking the Coding Interview", "author": "Gayle Laakmann McDowell"} }
+    //
+    // $model->meta()->all()
+    // array:3 [
+    //   "book" => array:2 [
+    //     "title" => "Cracking the Coding Interview"
+    //     "author" => "Gayle Laakmann McDowell"
+    //   ]
+    // ]
