@@ -69,3 +69,23 @@ Remove element from array. This will automatically be persisted
 `all()`
 
 Get all the elements from the array
+
+### Examples
+The property on the object will always be an up to date JSON string so you can use what ever persistance method you choose.
+
+    $model = new SampleModel();
+    
+    // Use dot notation to access nested values
+    $model->meta()->set('book.title', 'Cracking the Coding Interview');
+    $model->meta()->set('book.author', 'Gayle Laakmann McDowell');
+    
+    // $model->meta
+    // { "book":{"title": "Cracking the Coding Interview", "author": "Gayle Laakmann McDowell"} }
+    //
+    // $model->meta()->all()
+    // array:3 [
+    //   "book" => array:2 [
+    //     "title" => "Cracking the Coding Interview"
+    //     "author" => "Gayle Laakmann McDowell"
+    //   ]
+    // ]
