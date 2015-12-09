@@ -31,16 +31,17 @@ class JsonField
     }
 
     /**
-     * Merge the given array into existing values. Do not allow adding fields here
+     * Merge the given array into existing values. Require whitelist to add keys
      *
      * @param array $values
+     * @param array $allowedKeys
      * @return array
      */
-    public function merge( array $values )
+    public function merge( array $values, array $allowedKeys = [] )
     {
         $this->data = array_merge(
             $this->data,
-            array_only( $values, array_keys( $this->data ) )
+            array_only( $values, array_merge(array_keys( $this->data ), $allowedKeys) )
         );
 
         $this->persist();

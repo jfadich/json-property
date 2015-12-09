@@ -56,11 +56,11 @@ Get a value, or default if it is not present in the array. You can use the dot n
 
 `set($key, $value)`
 
-Set/Update the given key/value pair. This will automatically persist to the database.
+Set/Update the given key/value pair.
 
-`merge( array $values )`
+`merge( array $values, array $allowedKeys = [] )`
 
-Merge the given array into the saved one. *Note: This will only merge values for keys that already exist in the array. To add new keys you must use set().*
+Merge the given array into the saved one. This will not add keys that don't exist in original array unless the key is included in the whitelist.
 
 `forget($key)`
 
