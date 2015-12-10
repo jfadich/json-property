@@ -4,6 +4,12 @@ namespace Jfadich\JsonField;
 
 use Exception;
 
+/**
+ * Class JsonField
+ *
+ * @package Jfadich\JsonField
+ * @author John Fadich
+ */
 class JsonField
 {
     /**
@@ -21,13 +27,22 @@ class JsonField
     protected $data = [ ];
 
     /**
-     * @param JsonFieldInterface $model
+     * Property on the model to store the JSON string
+     *
+     * @var null
      */
-    public function __construct( JsonFieldInterface &$model )
+    private $boundProperty = null;
+
+    /**
+     * @param JsonFieldInterface $model
+     * @param $property
+     */
+    public function __construct( JsonFieldInterface &$model, $property )
     {
-        $data           = json_decode( $model->getJsonString(), true );
-        $this->data     = is_array($data) ? $data : [];
-        $this->model    = $model;
+        $data                = json_decode( $model->getJsonString(), true );
+        $this->data          = is_array($data) ? $data : [];
+        $this->model         = $model;
+        $this->boundProperty = $property;
     }
 
     /**
