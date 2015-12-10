@@ -12,12 +12,7 @@ use Exception;
  */
 class JsonField
 {
-    /**
-     * Model to present from
-     *
-     * @var JsonFieldInterface
-     */
-    protected $model;
+
 
     /**
      * Array of current values
