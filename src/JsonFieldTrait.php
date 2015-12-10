@@ -25,7 +25,7 @@ trait JsonFieldTrait
      */
     public function getJsonString($property)
     {
-        if ( $this->jsonField === null ) {
+        if ( !$this->jsonManager()->isJsonProperty($property) ) {
             throw new Exception( 'jsonField is not set on model '. get_class($this) );
         }
 
@@ -41,7 +41,7 @@ trait JsonFieldTrait
      */
     public function saveJsonString($property, $jsonString)
     {
-        if ( $this->jsonField === null ) {
+        if ( !$this->jsonManager()->isJsonProperty($property) ) {
             throw new Exception( 'jsonField is not set on model '. get_class($this) );
         }
 
@@ -57,14 +57,14 @@ trait JsonFieldTrait
      */
     public function __call($method, $arguments)
     {
-        if($this->getJsonManager()->isValidProperty($method)) {
-            return call_user_func_array([$this->getJsonManager(), 'getJsonProperty'], array_unshift($arguments, $method));
+        if($this->jsonManager()->isJsonProperty($method)) {
+            return call_user_func_array([$this->jsonManager(), 'getJsonProperty'], array_unshift($arguments, $method));
         }
 
         return parent::__call($method, $arguments);
     }
 
-    private function getJsonManager()
+    private function jsonManager()
     {
         if($this->jsonManager === null)
             $this->jsonManager = new JsonManager($this, $this->jsonField);

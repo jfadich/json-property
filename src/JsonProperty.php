@@ -1,19 +1,17 @@
 <?php
 
-namespace Jfadich\JsonField;
+namespace Jfadich\JsonProperty;
 
 use Exception;
 
 /**
- * Class JsonField
+ * Class JsonProperty
  *
  * @package Jfadich\JsonField
  * @author John Fadich
  */
-class JsonField
+class JsonProperty
 {
-
-
     /**
      * Array of current values
      *
@@ -118,7 +116,7 @@ class JsonField
     }
 
     /**
-     * @return array|mixed
+     * @return object
      */
     public function all()
     {

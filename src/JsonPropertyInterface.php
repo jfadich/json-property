@@ -1,8 +1,8 @@
 <?php
 
-namespace Jfadich\JsonField;
+namespace Jfadich\JsonProperty;
 
-interface JsonFieldInterface
+interface JsonPropertyInterface
 {
     /**
      * Get the raw JSON string off the Model.
