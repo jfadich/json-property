@@ -7,15 +7,17 @@ interface JsonPropertyInterface
     /**
      * Get the raw JSON string off the Model.
      *
-     * @return string|null
+     * @param string $property
+     * @return null|string
      */
-    public function getJsonString();
+    public function getJsonString($property);
 
     /**
      * Persist the updated JSON string
      *
-     * @param $jsonString
+     * @param string $property
+     * @param string $jsonString
      * @return mixed
      */
-    public function saveJsonString($jsonString);
+    public function saveJsonString($property, $jsonString);
 }

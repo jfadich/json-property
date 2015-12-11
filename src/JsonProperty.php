@@ -2,12 +2,10 @@
 
 namespace Jfadich\JsonProperty;
 
-use Exception;
-
 /**
  * Class JsonProperty
  *
- * @package Jfadich\JsonField
+ * @package Jfadich\JsonProperty
  * @author John Fadich
  */
 class JsonProperty

@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Jfadich\\JsonField\\": "src"
+      "Jfadich\\JsonProperty\\": "src"
     }
   }
 }

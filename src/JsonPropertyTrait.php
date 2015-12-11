@@ -1,48 +1,48 @@
 <?php
 
-namespace Jfadich\JsonField;
+namespace Jfadich\JsonProperty;
 
-use Exception;
-
-trait JsonFieldTrait
+trait JsonPropertyTrait
 {
     /**
      * Properties on model that are to be used as JSON objects
-     *
      * @var string|array
      */
-    protected $jsonField = null;
+    protected $jsonProperty = null;
 
+    /**
+     * Service to manage multiple properties on a single model
+     * @var JsonManager
+     */
     private $jsonManager = null;
-
 
     /**
      * Retrieve the raw JSON string from the model
      *
      * @param $property
      * @return null|string
-     * @throws Exception
+     * @throws JsonPropertyException
      */
     public function getJsonString($property)
     {
         if ( !$this->jsonManager()->isJsonProperty($property) ) {
-            throw new Exception( 'jsonField is not set on model '. get_class($this) );
+            throw new JsonPropertyException("Requested property '{$property}' is not a valid for '".get_class($this)."'.");
         }
 
         return $this->{$property};
     }
 
     /**
-     * Set the raw json string on the model and persist it
+     * Set the raw json string on the model
      *
-     * @param $property
-     * @param $jsonString
-     * @throws Exception
+     * @param string $property
+     * @param string $jsonString
+     * @throws JsonPropertyException
      */
     public function saveJsonString($property, $jsonString)
     {
         if ( !$this->jsonManager()->isJsonProperty($property) ) {
-            throw new Exception( 'jsonField is not set on model '. get_class($this) );
+            throw new JsonPropertyException("Requested property '{$property}' is not a valid for '".get_class($this)."'.");
         }
 
         $this->{$property} = $jsonString;
@@ -50,7 +50,8 @@ trait JsonFieldTrait
 
 
     /**
-     * Magic method used to enable using the field name to access this object
+     * Magic method used to enable calling the property to access the JSON object
+     *
      * @param $method
      * @param $arguments
      * @return mixed
