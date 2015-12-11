@@ -1,5 +1,5 @@
 {
-  "name": "jfadich/json-field",
+  "name": "jfadich/json-property",
   "description": "Transform an object property into an enhanced array",
   "license": "MIT",
   "keywords": ["json"],

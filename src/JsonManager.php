@@ -14,13 +14,13 @@ class JsonManager
      * Array of instances of the JsonProperty object
      * @var array
      */
-    private $jsonInstances = null;
+    private $jsonInstances = [];
 
     /**
      * Array of properties on the model that are bound to JsonProperty instances
      * @var array
      */
-    private $properties = null;
+    private $properties = [];
 
     /**
      * Model to present from
@@ -93,8 +93,8 @@ class JsonManager
             throw new JsonPropertyException("Requested property '{$property}' is not a valid for '".get_class($this->model)."'.");
 
         if(!array_key_exists($property, $this->jsonInstances))
-            $this->jsonInstances[$property] = new JsonProperty( $this->model );
+            $this->jsonInstances[$property] = new JsonProperty( $this->model, $property );
 
-        return $this->jsonInstance[$property];
+        return $this->jsonInstances[$property];
     }
 }

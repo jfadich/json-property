@@ -4,7 +4,7 @@ The JsonField class provides a helpful interface for working with arrays of data
 ## Installation
 Use composer to install the package
 
->composer require composer require jfadich/json-field
+>composer require composer require jfadich/json-property
 
 ### Requirements
 - PHP >= 5.5.9
@@ -22,7 +22,7 @@ Use composer to install the package
     {
         use JsonFieldTrait;
         protected $jsonField = 'meta';
-    }`
+    }
 ```
 ### Customization
 The default implementation of `JsonFieldInterface` looks for a property on the model based on the value of `jsonField` to access the raw JSON string.

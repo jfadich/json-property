@@ -5,12 +5,6 @@ namespace Jfadich\JsonProperty;
 trait JsonPropertyTrait
 {
     /**
-     * Properties on model that are to be used as JSON objects
-     * @var string|array
-     */
-    protected $jsonProperty = null;
-
-    /**
      * Service to manage multiple properties on a single model
      * @var JsonManager
      */
@@ -59,7 +53,8 @@ trait JsonPropertyTrait
     public function __call($method, $arguments)
     {
         if($this->jsonManager()->isJsonProperty($method)) {
-            return call_user_func_array([$this->jsonManager(), 'getJsonProperty'], array_unshift($arguments, $method));
+            array_unshift($arguments, $method);
+            return call_user_func_array([$this->jsonManager(), 'getJsonProperty'], $arguments);
         }
 
         return parent::__call($method, $arguments);
@@ -68,7 +63,7 @@ trait JsonPropertyTrait
     private function jsonManager()
     {
         if($this->jsonManager === null)
-            $this->jsonManager = new JsonManager($this, $this->jsonField);
+            $this->jsonManager = new JsonManager($this, $this->jsonProperty);
 
         return $this->jsonManager;
     }
