@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/jfadich/json-property.svg)](https://travis-ci.org/jfadich/json-property)
+[![Build Status](http://img.shields.io/travis/jfadich/json-property.svg?style=flat-square)](https://travis-ci.org/jfadich/json-property)
+[![Latest Version](http://img.shields.io/packagist/v/jfadich/json-property.svg?style=flat-square)](https://packagist.org/jfadich/json-property)
+[![HHVM Status](http://hhvm.h4cc.de/badge/jfadich/json-property.svg?style=flat-square)](http://hhvm.h4cc.de/package/jfadich/json-property)
+
 # JsonProperty
 The JsonProperty class provides a helpful interface for working with arrays of data intended to be stored as a JSON string.
 
