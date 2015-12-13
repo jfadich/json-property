@@ -1,43 +1,49 @@
-# JsonField
-The JsonField class provides a helpful interface for working with arrays of data intended to be stored as a JSON string.
+[![Build Status](https://travis-ci.org/jfadich/json-property.svg)](https://travis-ci.org/jfadich/json-property)
+# JsonProperty
+The JsonProperty class provides a helpful interface for working with arrays of data intended to be stored as a JSON string.
+
 
 ## Installation
 Use composer to install the package
 
->composer require composer require jfadich/json-field
+>composer require composer require jfadich/json-property
 
 ### Requirements
 - PHP >= 5.5.9
 
 ### Configuration
-1. Add the `JsonFieldTrait` trait to the model
-2. Set the `jsonField` property. This is the name of the method that will be called to access the JsonField object
+1. Add the `JsonPropertyTrait` trait to the model
+2. Set the `jsonProperty` property. This is the name of the method that will be called to access the JsonProperty object. You can set this to an array to enable multiple properties on a single model.
 ```
     namespace App;
     
-    use Jfadich\JsonField\JsonFieldTrait;
-    use Jfadich\JsonField\JsonFieldInterface;
+    use Jfadich\JsonProperty\JsonPropertyTrait;
+    use Jfadich\JsonProperty\JsonPropertyInterface;
     
-    class SampleModel implements JsonFieldInterface
+    class SampleModel implements JsonPropertyInterface
     {
-        use JsonFieldTrait;
-        protected $jsonField = 'meta';
-    }`
+        use JsonPropertyTrait;
+        protected $jsonProperty = 'meta';
+    }
 ```
 ### Customization
-The default implementation of `JsonFieldInterface` looks for a property on the model based on the value of `jsonField` to access the raw JSON string.
+The JsonProperty object keeps the property on the model up to date with the current JSON string. If you want to automatically persist the data on update feel free to override the `saveJsonString()` method on the model.
 
-If your set up differs you simply need to override the `getJsonString()` and/or `saveJsonString($jsonString)` methods.
+    public function saveJsonString($property, $jsonString)
+    {
+        parent::saveJsonString($property, $jsonString);
+
+        $this->saveToSQL(); // Persist to the database or any other method
+    }
 
 ## Usage
-To get the JsonField instance call `$model->getJson()`. From there you have access to all the methods below.
+Call a method on the model named after the values you set to `$jsonProperty` to access the data stored in the JSON string
 
     $model = new SampleModel();
 
-    // These are both equivalent
-    $value = $model->getJson()->get('keyName'); 
-    $value = $model->meta()->get('keyName');
-    $value = $model->meta('keyName');
+    $model->meta()->set('key', 'value');
+    $value = $model->meta()->get('key'); // 'value'
+    $value = $model->meta('key'); // 'value'
 
 
 ### Available Methods

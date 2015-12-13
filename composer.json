@@ -1,5 +1,5 @@
 {
-  "name": "jfadich/json-field",
+  "name": "jfadich/json-property",
   "description": "Transform an object property into an enhanced array",
   "license": "MIT",
   "keywords": ["json"],
@@ -8,6 +8,11 @@
       "name": "John Fadich"
     }
   ],
+  "autoload-dev": {
+    "classmap": [
+      "tests"
+    ]
+  },
   "require": {
     "php": ">=5.5.9",
     "illuminate/support": "^5.1"
@@ -17,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Jfadich\\JsonField\\": "src"
+      "Jfadich\\JsonProperty\\": "src"
     }
   }
 }

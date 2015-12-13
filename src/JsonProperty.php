@@ -1,18 +1,15 @@
 <?php
 
-namespace Jfadich\JsonField;
+namespace Jfadich\JsonProperty;
 
-use Exception;
-
-class JsonField
+/**
+ * Class JsonProperty
+ *
+ * @package Jfadich\JsonProperty
+ * @author John Fadich
+ */
+class JsonProperty
 {
-    /**
-     * Model to present from
-     *
-     * @var JsonFieldInterface
-     */
-    protected $model;
-
     /**
      * Array of current values
      *
@@ -21,13 +18,22 @@ class JsonField
     protected $data = [ ];
 
     /**
-     * @param JsonFieldInterface $model
+     * Property on the model to store the JSON string
+     *
+     * @var string
      */
-    public function __construct( JsonFieldInterface &$model )
+    private $boundProperty = null;
+
+    /**
+     * @param JsonPropertyInterface $model
+     * @param $property
+     */
+    public function __construct( JsonPropertyInterface &$model, $property )
     {
-        $data           = json_decode( $model->getJsonString(), true );
-        $this->data     = is_array($data) ? $data : [];
-        $this->model    = $model;
+        $this->boundProperty = $property;
+        $data                = json_decode( $model->getJsonString($property), true );
+        $this->data          = is_array($data) ? $data : [];
+        $this->model         = $model;
     }
 
     /**
@@ -108,7 +114,7 @@ class JsonField
     }
 
     /**
-     * @return array|mixed
+     * @return object
      */
     public function all()
     {
@@ -120,29 +126,6 @@ class JsonField
      */
     private function persist()
     {
-        $this->model->saveJsonString(json_encode($this->data));
-    }
-
-    /**
-     * @param $key
-     * @return mixed
-     * @throws \Exception
-     */
-    public function __get( $key )
-    {
-        if ( $this->has( $key ) ) {
-            return $this->get( $key );
-        }
-
-        throw new Exception( "The property {$key} does not exist." );
-    }
-
-    /**
-     * @param $key
-     * @param $value
-     */
-    public function __set( $key, $value )
-    {
-        $this->set( $key, $value );
+        $this->model->saveJsonString($this->boundProperty, json_encode($this->data));
     }
 }
