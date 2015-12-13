@@ -1,5 +1,7 @@
+[![Build Status](https://travis-ci.org/jfadich/json-property.svg)](https://travis-ci.org/jfadich/json-property)
 # JsonProperty
 The JsonProperty class provides a helpful interface for working with arrays of data intended to be stored as a JSON string.
+
 
 ## Installation
 Use composer to install the package
