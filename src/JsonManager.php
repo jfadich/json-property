@@ -70,12 +70,17 @@ class JsonManager
      * Check if requested property is bound to the model
      *
      * @param string $property
+     * @param bool $throwException
      * @return bool
+     * @throws JsonPropertyException
      */
-    public function isJsonProperty($property)
+    public function isJsonProperty($property, $throwException = false)
     {
         if(is_string($property) && in_array($property, $this->properties))
             return true;
+
+        if($throwException)
+            throw new JsonPropertyException("Requested property '{$property}' is not a valid for '".get_class($this)."'.");
 
         return false;
     }

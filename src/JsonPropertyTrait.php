@@ -19,9 +19,7 @@ trait JsonPropertyTrait
      */
     public function getJsonString($property)
     {
-        if ( !$this->jsonManager()->isJsonProperty($property) ) {
-            throw new JsonPropertyException("Requested property '{$property}' is not a valid for '".get_class($this)."'.");
-        }
+        $this->jsonManager()->isJsonProperty($property, true);
 
         return $this->{$property};
     }
@@ -35,9 +33,7 @@ trait JsonPropertyTrait
      */
     public function saveJsonString($property, $jsonString)
     {
-        if ( !$this->jsonManager()->isJsonProperty($property) ) {
-            throw new JsonPropertyException("Requested property '{$property}' is not a valid for '".get_class($this)."'.");
-        }
+        $this->jsonManager()->isJsonProperty($property, true);
 
         $this->{$property} = $jsonString;
     }
@@ -57,9 +53,14 @@ trait JsonPropertyTrait
             return call_user_func_array([$this->jsonManager(), 'getJsonProperty'], $arguments);
         }
 
-        return parent::__call($method, $arguments);
+        return is_callable(['parent', '__call']) ? parent::__call($method, $arguments) : null;
     }
 
+    /**
+     * Get the JsonManager instance
+     *
+     * @return JsonManager
+     */
     private function jsonManager()
     {
         if($this->jsonManager === null)

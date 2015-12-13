@@ -31,7 +31,6 @@ class JsonProperty
     public function __construct( JsonPropertyInterface &$model, $property )
     {
         $this->boundProperty = $property;
-        $this->boundProperty = $property;
         $data                = json_decode( $model->getJsonString($property), true );
         $this->data          = is_array($data) ? $data : [];
         $this->model         = $model;
@@ -128,28 +127,5 @@ class JsonProperty
     private function persist()
     {
         $this->model->saveJsonString($this->boundProperty, json_encode($this->data));
-    }
-
-    /**
-     * @param $key
-     * @return mixed
-     * @throws JsonPropertyException
-     */
-    public function __get( $key )
-    {
-        if ( $this->has( $key ) ) {
-            return $this->get( $key );
-        }
-
-        throw new JsonPropertyException( "The property {$key} does not exist." );
-    }
-
-    /**
-     * @param $key
-     * @param $value
-     */
-    public function __set( $key, $value )
-    {
-        $this->set( $key, $value );
     }
 }

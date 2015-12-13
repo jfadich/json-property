@@ -8,6 +8,11 @@
       "name": "John Fadich"
     }
   ],
+  "autoload-dev": {
+    "classmap": [
+      "tests"
+    ]
+  },
   "require": {
     "php": ">=5.5.9",
     "illuminate/support": "^5.1"
