@@ -1,5 +1,5 @@
 [![Build Status](http://img.shields.io/travis/jfadich/json-property.svg?style=flat-square)](https://travis-ci.org/jfadich/json-property)
-[![Latest Version](http://img.shields.io/packagist/v/jfadich/json-property.svg?style=flat-square)](https://packagist.org/jfadich/json-property)
+[![Latest Version](http://img.shields.io/packagist/v/jfadich/json-property.svg?style=flat-square)](https://packagist.org/packages/jfadich/json-property)
 [![HHVM Status](http://hhvm.h4cc.de/badge/jfadich/json-property.svg?style=flat-square)](http://hhvm.h4cc.de/package/jfadich/json-property)
 
 # JsonProperty
@@ -29,15 +29,6 @@ Use composer to install the package
         protected $jsonProperty = 'meta';
     }
 ```
-### Customization
-The JsonProperty object keeps the property on the model up to date with the current JSON string. If you want to automatically persist the data on update feel free to override the `saveJsonString()` method on the model.
-
-    public function saveJsonString($property, $jsonString)
-    {
-        parent::saveJsonString($property, $jsonString);
-
-        $this->saveToSQL(); // Persist to the database or any other method
-    }
 
 ## Usage
 Call a method on the model named after the values you set to `$jsonProperty` to access the data stored in the JSON string
@@ -98,3 +89,13 @@ The property on the object will always be an up to date JSON string so you can u
     //     "author" => "Gayle Laakmann McDowell"
     //   ]
     // ]
+
+### Customization
+The JsonProperty object keeps the property on the model up to date with the current JSON string. If you want to automatically persist the data on update feel free to override the `saveJsonString()` method on the model.
+
+    public function saveJsonString($property, $jsonString)
+    {
+        parent::saveJsonString($property, $jsonString);
+
+        $this->saveToSQL(); // Persist to the database or any other method
+    }
