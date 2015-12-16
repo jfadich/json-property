@@ -40,7 +40,7 @@ class JsonManager
         elseif(is_array($properties))
             $this->properties = $properties;
         else
-            throw new JsonPropertyException('Invalid property list');
+            throw new JsonPropertyException('"$jsonProperty" on '.get_class($model).' is invalid');
 
         $this->model = $model;
     }
