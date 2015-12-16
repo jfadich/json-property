@@ -46,6 +46,10 @@ class JsonPropertyTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('updated', $model->foo('new.key'));
 
+        $model->foo()->set('nullValue', null);
+
+        $this->assertEquals(false, $model->foo()->has('nullValue'));
+
         return $model;
     }
 
@@ -76,6 +80,6 @@ class JsonPropertyTest extends PHPUnit_Framework_TestCase
      */
     public function testJsonEncoding(JsonPropertyInterface $model)
     {
-        $this->assertEquals('{"bar":"baz","new":{"key":"updated"}}', $model->foo);
+        $this->assertEquals('{"bar":"baz","new":{"key":"updated"},"nullValue":null}', $model->foo);
     }
 }

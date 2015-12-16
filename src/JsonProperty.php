@@ -110,7 +110,10 @@ class JsonProperty
      */
     public function has( $key )
     {
-        return array_has( $this->data, $key );
+        if( !array_has( $this->data, $key ) || $this->isEmpty($key))
+            return false;
+
+        return true;
     }
 
     /**
@@ -119,6 +122,17 @@ class JsonProperty
     public function all()
     {
         return (object)$this->data;
+    }
+
+    /**
+     * Check if there is a value for the given key
+     *
+     * @param $key
+     * @return bool
+     */
+    public function isEmpty($key)
+    {
+        return $this->data[$key] === '' || $this->data[$key] === null || empty($this->data[$key]);
     }
 
     /**
