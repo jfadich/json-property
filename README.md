@@ -9,7 +9,7 @@ The JsonProperty class provides a helpful interface for working with arrays of d
 ## Installation
 Use composer to install the package
 
->composer require composer require jfadich/json-property
+>composer require jfadich/json-property
 
 ### Requirements
 - PHP >= 5.5.9
