@@ -37,6 +37,26 @@ class JsonProperty
     }
 
     /**
+     * Push a value into an array assigned to the provided key.
+     *
+     * @param $key
+     * @param $value
+     * @return mixed
+     * @throws JsonPropertyException
+     */
+    public function push($key, $value)
+    {
+        $array = $this->get($key, []);
+
+        if(!is_array($array))
+            throw new JsonPropertyException('Cannot push value to non array');
+
+        array_push($array, $value);
+
+        return $this->set($key, $array);
+    }
+
+    /**
      * Merge the given array into existing values. Require whitelist to add keys
      *
      * @param array $values
