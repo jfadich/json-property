@@ -3,8 +3,8 @@
 [![HHVM Status](http://hhvm.h4cc.de/badge/jfadich/json-property.svg?style=flat-square)](http://hhvm.h4cc.de/package/jfadich/json-property)
 
 # JsonProperty
-The JsonProperty class provides a helpful interface for working with arrays of data intended to be stored as a JSON string.
-
+JsonProperty provides a simple interface for storing key/value pairs to a single column on a model.
+This is useful for storing meta data or anything without a standard structure. The data is automatically serialized to a JSON when saving.
 
 ## Installation
 Use composer to install the package
@@ -60,7 +60,11 @@ Set/Update the given key/value pair.
 
 `merge( array $values, array $allowedKeys = [] )`
 
-Merge the given array into the saved one. This will not add keys that don't exist in original array unless the key is included in the whitelist.
+Merge the given array into the saved object. This will not add keys that don't exist in original object unless the key is included in the whitelist.
+
+`push( $key, $value )`
+
+If the value for the given $key is an array the value will be pushed to the array.
 
 `forget($key)`
 
