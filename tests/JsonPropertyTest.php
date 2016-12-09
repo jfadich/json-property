@@ -1,5 +1,6 @@
 <?php
 
+use Jfadich\JsonProperty\JsonPropertyException;
 use Jfadich\JsonProperty\JsonPropertyInterface;
 
 class JsonPropertyTest extends PHPUnit_Framework_TestCase
@@ -69,6 +70,30 @@ class JsonPropertyTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($original, $model->foo()->all());
 
         return $model;
+    }
+
+    public function testArrayPush()
+    {
+        $model = new TestModel();
+
+        $model->jsonProperty = 'foo';
+        $model->foo = '{"array_test": ["item_1"]}';
+
+        $model->foo()->push('array_test', 'item_2');
+
+        $this->assertEquals(['item_1', 'item_2'], $model->foo('array_test'));
+    }
+
+    public function testArrayPushFail()
+    {
+        $model = new TestModel();
+
+        $model->jsonProperty = 'foo';
+        $model->foo = '{"array_test": "string value"}';
+
+        $this->setExpectedException(JsonPropertyException::class);
+
+        $model->foo()->push('array_test', 'item_2');
     }
 
     /**
