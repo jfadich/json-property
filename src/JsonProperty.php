@@ -152,7 +152,7 @@ class JsonProperty
      */
     public function isEmpty($key)
     {
-        return $this->data[$key] === '' || $this->data[$key] === null || empty($this->data[$key]);
+        return !array_has($this->data, $key) || filled(array_get($this->data, $key));
     }
 
     /**
