@@ -3,7 +3,7 @@
 use Jfadich\JsonProperty\JsonPropertyException;
 use Jfadich\JsonProperty\JsonPropertyInterface;
 
-class JsonPropertyTest extends PHPUnit_Framework_TestCase
+class JsonPropertyTest extends \PHPUnit\Framework\TestCase
 {
     public function testDecodeJson()
     {
@@ -95,7 +95,7 @@ class JsonPropertyTest extends PHPUnit_Framework_TestCase
         $model->jsonProperty = 'foo';
         $model->foo = '{"array_test": "string value"}';
 
-        $this->setExpectedException(JsonPropertyException::class);
+        $this->expectException(JsonPropertyException::class);
 
         $model->foo()->push('array_test', 'item_2');
     }

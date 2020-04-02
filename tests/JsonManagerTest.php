@@ -5,7 +5,7 @@ use Jfadich\JsonProperty\JsonPropertyException;
 use Jfadich\JsonProperty\JsonPropertyTrait;
 use Jfadich\JsonProperty\JsonProperty;
 
-class JsonManagerTest extends PHPUnit_Framework_TestCase
+class JsonManagerTest extends \PHPUnit\Framework\TestCase
 {
     public function testStringMethodCall()
     {
@@ -36,7 +36,7 @@ class JsonManagerTest extends PHPUnit_Framework_TestCase
     {
         $model = new TestModel();
 
-        $this->setExpectedException(JsonPropertyException::class);
+        $this->expectException(JsonPropertyException::class);
 
         $manager = new \Jfadich\JsonProperty\JsonManager($model, 123);
     }
