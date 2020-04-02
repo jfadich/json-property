@@ -2,6 +2,8 @@
 
 namespace Jfadich\JsonProperty;
 
+use Illuminate\Support\Arr;
+
 /**
  * Class JsonProperty
  *
@@ -67,7 +69,7 @@ class JsonProperty
     {
         $this->data = array_merge(
             $this->data,
-            array_only( $values, array_merge(array_keys( $this->data ), $allowedKeys) )
+            Arr::only( $values, array_merge(array_keys( $this->data ), $allowedKeys) )
         );
 
         $this->persist();
@@ -78,7 +80,7 @@ class JsonProperty
     public function sort($sortColumn)
     {
         if($this->has($sortColumn)) {
-            $this->data = array_sort($this->get($sortColumn, []), function($value, $key) {
+            $this->data = Arr::sort($this->get($sortColumn, []), function($value, $key) {
                 return $key;
             });
 
@@ -95,7 +97,7 @@ class JsonProperty
      */
     public function get( $key, $default = null )
     {
-        return array_get( $this->data, $key, $default );
+        return Arr::get( $this->data, $key, $default );
     }
 
     /**
@@ -104,7 +106,7 @@ class JsonProperty
      */
     public function set( $key, $value )
     {
-        array_set($this->data, $key, $value);
+        Arr::set($this->data, $key, $value);
         $this->persist();
 
         return $value;
@@ -118,7 +120,7 @@ class JsonProperty
     public function forget($key)
     {
         if($this->has($key)) {
-            array_forget($this->data, $key);
+            Arr::forget($this->data, $key);
         }
 
         $this->persist();
@@ -130,7 +132,7 @@ class JsonProperty
      */
     public function has( $key )
     {
-        if( !array_has( $this->data, $key ) || $this->isEmpty($key))
+        if( !Arr::has( $this->data, $key ) || $this->isEmpty($key))
             return false;
 
         return true;
@@ -152,7 +154,7 @@ class JsonProperty
      */
     public function isEmpty($key)
     {
-        return !array_has($this->data, $key) || !filled(array_get($this->data, $key));
+        return !Arr::has($this->data, $key) || !filled(Arr::get($this->data, $key));
     }
 
     /**
